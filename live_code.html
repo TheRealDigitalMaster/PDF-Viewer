@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+body {
+background: #1e1e1e; 
+color: #fff;
+}
+        .title {
+            text-align: center;
+            padding: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .pdfview {
+            margin: auto;
+            display: block;
+            width: 100%;
+            height: 80vh;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+    <title>PDF Viewer</title>
+</head>
+<body>
+    <div class="title">
+        <h1>NexusLocal PDF Viewer</h1>
+    </div>
+
+    <!-- Input element to upload PDF -->
+    <input type="file" id="pdfInput" accept="application/pdf">
+
+    <!-- Object tag to display PDF -->
+    <object class="pdfview" id="pdfViewer" type="application/pdf">
+        <p>Your browser does not support PDFs. Please upload a PDF file.</p>
+    </object>
+
+    <script>
+        // Get the input element and the object element
+        const pdfInput = document.getElementById("pdfInput");
+        const pdfViewer = document.getElementById("pdfViewer");
+
+        // Event listener to handle file selection
+        pdfInput.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+
+            if (file && file.type === "application/pdf") {
+                // Create a URL for the uploaded PDF file
+                const fileURL = URL.createObjectURL(file);
+
+                // Set the object tag's data to the selected file URL
+                pdfViewer.data = fileURL;
+            } else {
+                alert("Please select a valid PDF file.");
+            }
+        });
+    </script>
+</body>
+</html>
